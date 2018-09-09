@@ -81,10 +81,21 @@ flight2017_merge$COUNT <- 1
 # Per documentation cancel codes are A=Carrier, B=Weather, C=National Air System, D=Security
 flight2017_merge$WEATHER_CANCELLED <- ifelse(flight2017_merge$CANCELLED == 1 & flight2017_merge$CANCELLATION_CODE == "B",
                                              1, 0)
+flight2017_merge$CARRIER_CANCELLED <- ifelse(flight2017_merge$CANCELLED == 1 & flight2017_merge$CANCELLATION_CODE == "A",
+                                             1, 0)
+flight2017_merge$NATAIRSYS_CANCELLED <- ifelse(flight2017_merge$CANCELLED == 1 & flight2017_merge$CANCELLATION_CODE == "C",
+                                             1, 0)
+flight2017_merge$SECURITY_CANCELLED <- ifelse(flight2017_merge$CANCELLED == 1 & flight2017_merge$CANCELLATION_CODE == "D",
+                                             1, 0)
 
 flight2017_total <- flight2017_merge %>% 
                     group_by(YEAR, MONTH, DAY_OF_MONTH, Region) %>% 
-                    summarise(NumFlights = sum(COUNT), NumCancels = sum(CANCELLED), NumWeatherCancels = sum(WEATHER_CANCELLED))
+                    summarise(NumFlights = sum(COUNT), 
+                              NumCancels = sum(CANCELLED), 
+                              NumWeatherCancels = sum(WEATHER_CANCELLED),
+                              NumCarrierCancels = sum(CARRIER_CANCELLED),
+                              NumNatAirSys = sum(NATAIRSYS_CANCELLED),
+                              NumSecurity = sum(SECURITY_CANCELLED))
 flight2017_total
 str(flight2017_total)
 
