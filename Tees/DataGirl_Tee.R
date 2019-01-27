@@ -45,7 +45,7 @@ plot.bar <- ggplot(data, aes(x=awesomeness, y=count, fill=awesomeness)) +
 # t-shirt layout
 
 png("C:\\Users\\Caroline\\Documents\\cfpTShirts\\DataTees\\DataGirl_Tee.png", 
-    width = 4500, height = 5400, units = "px", res=300, bg="black")
+    width = 4500, height = 5400, units = "px", res=300, bg="transparent")
 
 text.bot <- textGrob("DATAGIRL", gp=gpar(fontfamily="Broadway", 
                                              fontface="bold", fontsize = 96,
